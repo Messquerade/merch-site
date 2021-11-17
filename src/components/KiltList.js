@@ -15,13 +15,15 @@ function KiltList(props) {
           price={kilt.price}
           popularity={kilt.popularity} 
           quantity={kilt.quantity}
-          id={kilt.id}/>
+          id={kilt.id}
+          onBuyKilt={props.onBuyKilt}/>
       )}
     </React.Fragment>
   );
 }
 
 KiltList.propTypes = {
-  kiltList: PropTypes.array
+  kiltList: PropTypes.array,
+  onBuyKilt: PropTypes.func
 }
 export default KiltList;
