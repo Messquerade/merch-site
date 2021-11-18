@@ -21,21 +21,9 @@ class KiltControl extends React.Component {
   }
 
   handleBuyKilt = (id) => {
-    // find index of the the selected kilt
     let selectedKilt = this.state.mainKiltList.find(kilt => kilt.id === id);
-    // let index = this.state.mainKiltList.indexOf(this.state.mainKiltList.find(kilt => kilt.id === id));
-    // decrement the quantity by 1??????????
-    // replace the selected kilt in the mainKiltList with our new version
-    console.log(id);
-    console.log(selectedKilt);
-    console.log(selectedKilt.quantity);
     selectedKilt.quantity -= 1;
-    // selectedKilt.indexOf(selected.quantity)
-    // if (index !== 0) {
-    //   selected[index] -= 1;
-    // }
-    // 
-    const newMainKiltList = this.state.mainKiltList.map((kilt) => { return kilt === this.state.mainKiltList.find(kilt => kilt.id === id) ? kilt : selectedKilt});
+    const newMainKiltList = this.state.mainKiltList.map((kilt) => { return kilt.id === id ? selectedKilt : kilt});
     this.setState({
       mainKiltList: newMainKiltList,
       formVisibleOnPage: false
@@ -62,7 +50,7 @@ class KiltControl extends React.Component {
     return (
       <React.Fragment>
         {currentlyVisibleState}
-        <button className="btn btn-dark" onClick={this.handleClick}>{buttonText}</button>
+        <button className="btn btn-lg btn-block btn-dark" onClick={this.handleClick}>{buttonText}</button>
       </React.Fragment>
     )
   }

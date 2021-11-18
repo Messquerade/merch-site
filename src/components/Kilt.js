@@ -10,7 +10,7 @@ function Kilt(props){
     // function in KiltControl with decrement the quantity of each kilt in our list in state
   }
   let kiltDisplay = null;
-  if (props.quantity === 0) {
+  if (props.quantity <= 0) {
     kiltDisplay = <h3>{props.name} is <strong>Out of Stock</strong></h3>
   } else {
     kiltDisplay =
@@ -21,6 +21,7 @@ function Kilt(props){
     <li>$ {props.price}</li>
     <li>Rating: {props.popularity}</li>
     <li> Quantity Available: {props.quantity}</li>
+    <button className="btn btn-block btn-lg btn-dark" onClick={handleClick}>Buy</button>
     </>
   }
   
@@ -29,7 +30,6 @@ function Kilt(props){
   return (
     <React.Fragment>
       {kiltDisplay}
-      <button className="btn btn-dark" onClick={handleClick}>Buy</button>
     </React.Fragment>
   );
 }
