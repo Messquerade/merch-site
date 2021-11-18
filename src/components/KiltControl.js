@@ -1,6 +1,7 @@
 import React from 'react';
 import NewKiltForm from './NewKiltForm';
 import KiltList from './KiltList';
+import KiltDetails from './KiltDetails';
 
 class KiltControl extends React.Component {
 
@@ -8,7 +9,8 @@ class KiltControl extends React.Component {
     super(props);
     this.state = {
       formVisibleOnPage: false,
-      mainKiltList: []
+      mainKiltList: [],
+      selectedKilt: null
     }
   }
 
@@ -24,36 +26,45 @@ class KiltControl extends React.Component {
     let selectedKilt = this.state.mainKiltList.find(kilt => kilt.id === id);
     selectedKilt.quantity -= 1;
     const newMainKiltList = this.state.mainKiltList.map((kilt) => { return kilt.id === id ? selectedKilt : kilt});
-    this.setState({
-      mainKiltList: newMainKiltList,
-      formVisibleOnPage: false
-    });
+    this.setState({mainKiltList: newMainKiltList});
   }
 
   handleRestockKilts = (id, stock) => {
     let selectedKilt = this.state.mainKiltList.find(kilt => kilt.id === id);
     selectedKilt.quantity += stock;
     const newMainKiltList = this.state.mainKiltList.map((kilt => { return kilt.id === id? selectedKilt : kilt}));
-    this.setState({
-      mainKiltList: newMainKiltList,
-      formVisibleOnPage: false
-    });
+    this.setState({mainKiltList: newMainKiltList});
+  }
+
+  handleChangeSelectedKilt = (id) => {
+    let selectedKilt = this.state.mainKiltList.find(kilt => kilt.id === id);
+    this.setState({selectedKilt: selectedKilt});
   }
 
   handleClick = () => {
-    this.setState(prevState => ({
-      formVisibleOnPage: !prevState.formVisibleOnPage
-    }));
+    if (this.state.selectedKilt != null) {
+      this.setState({
+        formVisibleOnPage: false,
+        selectedKilt: null
+      });
+    } else {
+      this.setState(prevState => ({
+        formVisibleOnPage: !prevState.formVisibleOnPage
+      }));
+    }
   }
 
   render(){
     let currentlyVisibleState = null;
     let buttonText = null;
-    if (this.state.formVisibleOnPage) {
+    if (this.state.selectedKilt != null) {
+      currentlyVisibleState = <KiltDetails kilt={this.state.selectedKilt} />
+      buttonText = "Back to List";
+    } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewKiltForm onNewKiltCreation={this.handleNewKiltToList} />
       buttonText = "Back to List";
     } else {
-      currentlyVisibleState = <KiltList kiltList={this.state.mainKiltList} onBuyKilt={this.handleBuyKilt} onRestockKilts={this.handleRestockKilts}/>;
+      currentlyVisibleState = <KiltList kiltList={this.state.mainKiltList} onBuyKilt={this.handleBuyKilt} onRestockKilts={this.handleRestockKilts} onKiltSelect={this.handleChangeSelectedKilt}/>;
       buttonText = "Add a Kilt";
     }
     return (

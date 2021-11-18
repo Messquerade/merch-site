@@ -36,11 +36,13 @@ function Kilt(props){
 
   return (
     <React.Fragment>
+      <div onClick={() => props.onKiltSelect(props.id)}>
       {kiltDisplay}
       <form onSubmit={handleSubmit}>
         <input type="number" min="1" max="100" name="quantity" className="form-control"/>
       <button>Restock</button>
       </form>
+      </div>
     </React.Fragment>
   );
 }
@@ -55,7 +57,8 @@ Kilt.propTypes = {
   popularity: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   onBuyKilt: PropTypes.func,
-  onRestockKilts: PropTypes.func
+  onRestockKilts: PropTypes.func,
+  onKiltSelect: PropTypes.func
 }
 
 export default Kilt;

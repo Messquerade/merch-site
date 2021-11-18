@@ -16,8 +16,10 @@ function KiltList(props) {
           popularity={kilt.popularity} 
           quantity={kilt.quantity}
           id={kilt.id}
+          key={kilt.id}
           onBuyKilt={props.onBuyKilt}
-          onRestockKilts={props.onRestockKilts}/>
+          onRestockKilts={props.onRestockKilts}
+          onKiltSelect={props.onKiltSelect}/>
       )}
     </React.Fragment>
   );
@@ -26,6 +28,7 @@ function KiltList(props) {
 KiltList.propTypes = {
   kiltList: PropTypes.array,
   onBuyKilt: PropTypes.func,
-  onRestockKilts: PropTypes.func
+  onRestockKilts: PropTypes.func,
+  onKiltSelect: PropTypes.func
 }
 export default KiltList;
