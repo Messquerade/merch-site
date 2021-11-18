@@ -28,7 +28,16 @@ class KiltControl extends React.Component {
       mainKiltList: newMainKiltList,
       formVisibleOnPage: false
     });
-    
+  }
+
+  handleRestockKilts = (id, stock) => {
+    let selectedKilt = this.state.mainKiltList.find(kilt => kilt.id === id);
+    selectedKilt.quantity += stock;
+    const newMainKiltList = this.state.mainKiltList.map((kilt => { return kilt.id === id? selectedKilt : kilt}));
+    this.setState({
+      mainKiltList: newMainKiltList,
+      formVisibleOnPage: false
+    });
   }
 
   handleClick = () => {
@@ -44,7 +53,7 @@ class KiltControl extends React.Component {
       currentlyVisibleState = <NewKiltForm onNewKiltCreation={this.handleNewKiltToList} />
       buttonText = "Back to List";
     } else {
-      currentlyVisibleState = <KiltList kiltList={this.state.mainKiltList} onBuyKilt={this.handleBuyKilt}/>;
+      currentlyVisibleState = <KiltList kiltList={this.state.mainKiltList} onBuyKilt={this.handleBuyKilt} onRestockKilts={this.handleRestockKilts}/>;
       buttonText = "Add a Kilt";
     }
     return (

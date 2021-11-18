@@ -9,11 +9,11 @@ function NewKiltForm(props) {
     props.onNewKiltCreation({
       name: event.target.name.value,
       color: event.target.color.value,
-      pockets: event.target.pockets.value,
+      pockets: parseInt(event.target.pockets.value),
       size: event.target.size.value,
-      price: event.target.price.value,
+      price: parseInt(event.target.price.value),
       popularity: event.target.popularity.value,
-      quantity: event.target.quantity.value,
+      quantity: parseInt(event.target.quantity.value),
       id: v4()});
   }
 
