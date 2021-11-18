@@ -37,8 +37,16 @@ class KiltControl extends React.Component {
   }
 
   handleChangeSelectedKilt = (id) => {
-    let selectedKilt = this.state.mainKiltList.find(kilt => kilt.id === id);
+    const selectedKilt = this.state.mainKiltList.find(kilt => kilt.id === id);
     this.setState({selectedKilt: selectedKilt});
+  }
+
+  handleDeleteKilt = (id) => {
+    const newMainKiltList = this.state.mainKiltList.filter(kilt => kilt.id !== id);
+    this.setState({
+      mainKiltList: newMainKiltList,
+      selectedKilt: null
+    });
   }
 
   handleClick = () => {
@@ -58,7 +66,7 @@ class KiltControl extends React.Component {
     let currentlyVisibleState = null;
     let buttonText = null;
     if (this.state.selectedKilt != null) {
-      currentlyVisibleState = <KiltDetails kilt={this.state.selectedKilt} />
+      currentlyVisibleState = <KiltDetails kilt={this.state.selectedKilt} onDeleteKilt={this.handleDeleteKilt}/>
       buttonText = "Back to List";
     } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewKiltForm onNewKiltCreation={this.handleNewKiltToList} />

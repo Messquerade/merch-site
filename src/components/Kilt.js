@@ -23,7 +23,7 @@ function Kilt(props){
     kiltDisplay =
     <>
     <h3>{props.name}: {props.color}</h3>
-    <li>Number of Pockets:{props.pockets}</li>
+    <li>Number of Pockets: {props.pockets}</li>
     <li>Size: {props.size}</li>
     <li>$ {props.price}</li>
     <li>Rating: {props.popularity}</li>

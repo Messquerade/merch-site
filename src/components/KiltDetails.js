@@ -12,12 +12,14 @@ function KiltDetails(props) {
     <li>$ {kilt.price}</li>
     <li>Rating: {kilt.popularity}</li>
     <li> Quantity Available: {kilt.quantity}</li>
+    <button onClick={() => props.onDeleteKilt(kilt.id)}>Delete Kilt</button>
     </>
   );
 }
 
 KiltDetails.propTypes = {
-  kilt: PropTypes.object
+  kilt: PropTypes.object,
+  onDeleteKilt: PropTypes.func
 }
 
 export default KiltDetails;

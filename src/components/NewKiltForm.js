@@ -12,7 +12,7 @@ function NewKiltForm(props) {
       pockets: parseInt(event.target.pockets.value),
       size: event.target.size.value,
       price: parseInt(event.target.price.value),
-      popularity: event.target.popularity.value,
+      popularity: parseInt(event.target.popularity.value),
       quantity: parseInt(event.target.quantity.value),
       id: v4()});
   }
